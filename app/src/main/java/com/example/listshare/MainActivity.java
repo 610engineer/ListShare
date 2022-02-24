@@ -4,9 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -14,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = findViewById(R.id.main_recycler_view);
+        FloatingActionButton fab = findViewById(R.id.add_fab);
 
         //fix recyclerview layout size
         recyclerView.setHasFixedSize(true);
@@ -25,6 +32,15 @@ public class MainActivity extends AppCompatActivity {
         //make adapter and set to recyclerview
         RecyclerView.Adapter mainAdapter = new MainAdapter(createRowData());
         recyclerView.setAdapter(mainAdapter);
+
+       fab.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(MainActivity.this, addItem.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     private String[] createRowData(){
