@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-@Entity(tableName = "share_list_id")
-public class roomEntity {
+@Entity(tableName = "share_list_DB")
+public class RoomEntity {
     @PrimaryKey(autoGenerate = true)
     private int uid;
 
