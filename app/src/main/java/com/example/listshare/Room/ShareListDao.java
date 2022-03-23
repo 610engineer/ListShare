@@ -1,4 +1,4 @@
-package com.example.listshare;
+package com.example.listshare.Room;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

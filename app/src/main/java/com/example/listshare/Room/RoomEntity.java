@@ -1,4 +1,4 @@
-package com.example.listshare;
+package com.example.listshare.Room;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
@@ -11,6 +11,10 @@ public class RoomEntity {
 
     @ColumnInfo(name = "list_id")
     private int listId;
+
+    public RoomEntity(int listId){
+        this.listId = listId;
+    }
 
     public void setUid(int id){
         this.uid = id;
