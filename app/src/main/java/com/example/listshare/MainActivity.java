@@ -39,8 +39,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String text = t_input.getText().toString();
-                t_index.setText(text);
-                new DataStoreAsyncTask(db , activity , t_index);
+                new DataStoreAsyncTask(db , activity , text , t_index).execute();
 
             }
         });

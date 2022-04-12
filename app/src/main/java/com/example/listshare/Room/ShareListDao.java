@@ -17,4 +17,7 @@ public interface ShareListDao {
 
     @Delete
     void delete(RoomEntity entity);
+
+    @Query("Delete FROM share_list_DB")
+    void deleteDB();
 }
