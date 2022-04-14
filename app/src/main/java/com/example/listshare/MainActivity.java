@@ -13,8 +13,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.listshare.Room.AppDatabase;
-import com.example.listshare.Room.AppDatabaseSingleton;
 import com.example.listshare.Room.DataStoreAsyncTask;
+import com.example.listshare.Room.ShareListDao;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -31,15 +31,22 @@ public class MainActivity extends AppCompatActivity {
 
         //for test
         Button t_button = findViewById(R.id.t_button);
+        Button d_button = findViewById(R.id.delete_button);
         EditText t_input = findViewById(R.id.t_input);
         TextView t_index = findViewById(R.id.t_index);
         Activity activity = this;
-        AppDatabase db = AppDatabaseSingleton.getInstance(getApplicationContext());
         t_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String text = t_input.getText().toString();
-                new DataStoreAsyncTask(db , activity , text , t_index).execute();
+
+
+            }
+        });
+
+        d_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
             }
         });
