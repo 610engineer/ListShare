@@ -28,7 +28,7 @@ public class RoomEntity {
         return uid;
     }
 
-    public int getListId(){
-        return listId;
+    public String getListId(){
+        return Integer.toString(listId);
     }
 }
