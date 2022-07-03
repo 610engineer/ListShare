@@ -16,7 +16,7 @@ import java.util.concurrent.Executors;
 public abstract class AppDatabase extends RoomDatabase {
     public abstract ShareListDao shareListDao();
 
-    private static AppDatabase INSTANCE = null;
+    private static volatile AppDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);

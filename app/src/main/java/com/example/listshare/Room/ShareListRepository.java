@@ -15,7 +15,7 @@ public class ShareListRepository {
         mShareListDao = db.shareListDao();
     }
 
-    LiveData<List<RoomEntity>> getAll(){
+    LiveData<List<RoomEntity>> getAllEntities(){
         return mAllentity;
     }
 
