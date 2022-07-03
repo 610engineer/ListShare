@@ -10,7 +10,7 @@ public class RoomEntity {
     private int uid;
 
     @ColumnInfo(name = "list_id")
-    private int listId;
+    public int listId;
 
     public RoomEntity(int listId){
         this.listId = listId;
@@ -28,7 +28,9 @@ public class RoomEntity {
         return uid;
     }
 
+
     public String getListId(){
         return Integer.toString(listId);
     }
+
 }

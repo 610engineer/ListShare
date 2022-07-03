@@ -12,7 +12,7 @@ import com.example.listshare.Room.ShareListDao;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {RoomEntity.class} , version = 1)
+@Database(entities = {RoomEntity.class} , version = 1 , exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract ShareListDao shareListDao();
 
