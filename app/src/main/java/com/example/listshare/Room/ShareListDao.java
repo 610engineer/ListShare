@@ -11,10 +11,6 @@ import java.util.List;
 
 @Dao
 public interface ShareListDao {
-    //Get all list ID
-    @Query("SELECT * FROM share_list_table")
-    List<RoomEntity> getAll();
-
     //Add new ID
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(RoomEntity entity);
@@ -25,7 +21,7 @@ public interface ShareListDao {
 
     //Delete All ID
     @Query("DELETE FROM share_list_table")
-    void deleteDB();
+    void deleteAll();
 
     @Query("SELECT * FROM share_list_table ORDER BY list_id ASC")
     LiveData<List<RoomEntity>> getASCEntity();

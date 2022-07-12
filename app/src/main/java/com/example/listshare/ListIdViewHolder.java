@@ -12,10 +12,9 @@ public class ListIdViewHolder extends RecyclerView.ViewHolder {
 
     private ListIdViewHolder(View ListIdView){
         super(ListIdView);
-        listIdView = ListIdView.findViewById(R.id.title_text_view);
+        listIdView = ListIdView.findViewById(R.id.textView);
     }
-    public void bind(String text){
-        listIdView.setText(text);
+    public void bind(String text){listIdView.setText(text);
     }
 
     static ListIdViewHolder create(ViewGroup parent){
