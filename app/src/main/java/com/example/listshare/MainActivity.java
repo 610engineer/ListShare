@@ -51,10 +51,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void onActivityResult(int requestCode , int resutCode , Intent data){
-        super.onActivityResult(requestCode,resutCode , data);
+    public void onActivityResult(int requestCode , int resultCode , Intent data){
+        super.onActivityResult(requestCode,resultCode , data);
 
-        if(requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resutCode == RESULT_OK){
+        if(requestCode == NEW_WORD_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK){
             RoomEntity entity = new RoomEntity(Integer.parseInt(data.getStringExtra("listId")));
             mEntityViewModel.insert(entity);
 
