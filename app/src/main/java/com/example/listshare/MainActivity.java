@@ -48,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //for test
+        FirebaseClient fc = new FirebaseClient();
+        fc.testFunc();
 
     }
 
