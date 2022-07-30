@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.listshare.Room.EntityViewModel;
@@ -25,6 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.main_recycler_view);
         FloatingActionButton fab = findViewById(R.id.fab);
+
+        //button for test
+        Button bt1 = findViewById(R.id.button1);
+        Button bt2 = findViewById(R.id.button2);
+        Button bt3 = findViewById(R.id.button3);
+
         //fix recyclerview layout size
         recyclerView.setHasFixedSize(true);
 
@@ -49,7 +57,28 @@ public class MainActivity extends AppCompatActivity {
 
         //for test
         FirebaseClient fc = new FirebaseClient();
-        fc.testFunc();
+
+
+        bt1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fc.testFunc();
+            }
+        });
+
+        bt2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fc.testRead();
+            }
+        });
+
+        bt3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fc.testDelete();
+            }
+        });
 
     }
 
@@ -63,10 +92,12 @@ public class MainActivity extends AppCompatActivity {
         }else{
             Toast.makeText(
                     getApplicationContext(),
-                    "word not saved becasue it was empty",
+                    "word not saved because it was empty",
                     Toast.LENGTH_LONG).show();
         }
     }
+
+
 
     private String[] createRowData(){
         String[] dataSet = new String[10];
