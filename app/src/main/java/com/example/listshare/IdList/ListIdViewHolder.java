@@ -1,4 +1,4 @@
-package com.example.listshare;
+package com.example.listshare.IdList;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.listshare.R;
 
 public class ListIdViewHolder extends RecyclerView.ViewHolder {
     private final TextView listIdView;
