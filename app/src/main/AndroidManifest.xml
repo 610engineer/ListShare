@@ -23,6 +23,9 @@
         <activity
             android:name=".AddItemActivity">
         </activity>
+        <activity
+            android:name=".IdList.DispListIdActivity">
+        </activity>
     </application>
 
 </manifest>

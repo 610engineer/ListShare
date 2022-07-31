@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.listshare.R;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
