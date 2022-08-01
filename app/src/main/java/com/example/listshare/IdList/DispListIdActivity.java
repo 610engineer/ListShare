@@ -34,7 +34,7 @@ public class DispListIdActivity extends AppCompatActivity {
         recyclerView.setLayoutManager((layoutManager));
 
         //make adapter and set to recyclerview
-        final ListIdAdapter adapter = new ListIdAdapter(new ListIdAdapter.WordDiff());
+        final ListIdAdapter adapter = new ListIdAdapter(new ListIdAdapter.IdDiff());
         recyclerView.setAdapter(adapter);
 
         // Get a new or existing ViewModel from the ViewModelProvider.

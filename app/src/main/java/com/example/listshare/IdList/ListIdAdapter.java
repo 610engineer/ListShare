@@ -24,7 +24,7 @@ public class ListIdAdapter extends ListAdapter<RoomEntity , ListIdViewHolder> {
         holder.bind(current.getListId());
     }
 
-    static class WordDiff extends DiffUtil.ItemCallback<RoomEntity>{
+    static class IdDiff extends DiffUtil.ItemCallback<RoomEntity>{
         @Override
         public boolean areItemsTheSame(@NonNull RoomEntity oldItem , @NonNull RoomEntity newItem){
             return oldItem == newItem;
