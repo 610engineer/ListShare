@@ -8,15 +8,16 @@ import java.util.List;
 
 public class ShareListRepository {
     private ShareListDao mShareListDao;
-    private LiveData<List<RoomEntity>> mAllentity;
+    private LiveData<List<RoomEntity>> mAllEntity;
 
     ShareListRepository(Application application){
         AppDatabase db = AppDatabase.getDatabase(application);
         mShareListDao = db.shareListDao();
+        mAllEntity = mShareListDao.getASCEntity();
     }
 
     LiveData<List<RoomEntity>> getAllEntities(){
-        return mAllentity;
+        return mAllEntity;
     }
 
     void insert(RoomEntity entity){

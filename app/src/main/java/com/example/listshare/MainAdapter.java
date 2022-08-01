@@ -22,7 +22,7 @@ public class MainAdapter extends RecyclerView.Adapter<MainAdapter.MainViewHolder
 
         MainViewHolder(@NonNull View itemView){
             super(itemView);
-            title = itemView.findViewById(R.id.title_text_view);
+            title = itemView.findViewById(R.id.textView);
         }
     }
 

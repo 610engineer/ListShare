@@ -21,7 +21,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".AddItem">
+            android:name=".AddItemActivity">
+        </activity>
+        <activity
+            android:name=".IdList.DispListIdActivity">
         </activity>
     </application>
 
