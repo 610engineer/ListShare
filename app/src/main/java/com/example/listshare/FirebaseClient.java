@@ -16,7 +16,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FirebaseClient {
@@ -24,6 +26,25 @@ public class FirebaseClient {
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final static String TAG = "FirebaseClient";
+    public List<String> GetMemoList(){
+        List<String> dataset = new ArrayList<>();
+        db.collection("users")
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
+                        if(task.isSuccessful()){
+                            for(QueryDocumentSnapshot document : task.getResult()){
+                                Map<String, Object> values = document.getData();
+                                dataset.add(values.get("first").toString());
+                            }
+                        }else{
+                            Log.w(TAG, "Error getting Document" , task.getException());
+                        }
+                    }
+                });
+        return dataset;
+    }
 
     public void testFunc(){
         //create new user with a first and last name

@@ -1,6 +1,7 @@
 package com.example.listshare;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
@@ -9,7 +10,12 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.listshare.IdList.DispListIdActivity;
+import com.example.listshare.IdList.ListIdAdapter;
+import com.example.listshare.MemoList.MemoAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +36,22 @@ public class MainActivity extends AppCompatActivity {
         Button bt2 = findViewById(R.id.button2);
         Button bt3 = findViewById(R.id.button3);
 
+        FirebaseClient fc = new FirebaseClient();
+
+        //fix recyclerview layout size
+        recyclerView.setHasFixedSize(true);
+
+        //set recyclerview to layout manager
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager((layoutManager));
+
+        //make adapter and set to recyclerview
+        List<String> dataset = new ArrayList<>();
+        dataset = fc.GetMemoList();
+        final MemoAdapter adapter = new MemoAdapter(dataset);
+        recyclerView.setAdapter(adapter);
+
+
         dispListIdBt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //for test
-        FirebaseClient fc = new FirebaseClient();
+
 
 
         bt1.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+
 
 
 
