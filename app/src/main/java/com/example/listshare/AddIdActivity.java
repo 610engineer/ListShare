@@ -3,25 +3,19 @@ package com.example.listshare;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.listshare.R;
-import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.w3c.dom.Text;
-
-public class AddItemActivity extends AppCompatActivity {
+public class AddIdActivity extends AppCompatActivity {
     private  EditText mEditText;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_item);
-        Button addButton = findViewById(R.id.add_button);
-        mEditText = findViewById(R.id.input_text);
+        setContentView(R.layout.activity_add_id);
+        Button addButton = findViewById(R.id.add_item_button);
+        mEditText = findViewById(R.id.input_id);
 
         addButton.setOnClickListener(view -> {
             Intent replyIntent = new Intent();
