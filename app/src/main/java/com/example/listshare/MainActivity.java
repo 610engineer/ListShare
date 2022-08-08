@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         fab.setOnClickListener(view -> {
-            //Intent intent = new Intent(MainActivity.this, AddItemActivity.class);
+            Intent intent = new Intent(this, AddMemoActivity.class);
+            startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
         });
 
         //for test
