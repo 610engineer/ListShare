@@ -4,10 +4,13 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.listshare.MemoList.Memo;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -26,8 +29,33 @@ public class FirebaseClient {
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final static String TAG = "FirebaseClient";
+
+    public void AddMemo(String memo){
+        Map<String , Object> object = new HashMap<>();
+
+        object.put("memo" , memo);
+        db.collection("test1")
+                .add(object)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+
+
+    }
+
     public List<String> GetMemoList(){
         List<String> dataset = new ArrayList<>();
+        Query query = db.collection("test1")
+                .orderBy("timestamp");
         db.collection("users")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -96,15 +124,19 @@ public class FirebaseClient {
     }
 
     public void testRead(){
-        db.collection("users")
+        CollectionReference ref = db.collection("users");
+
+        Query query = ref.whereEqualTo("born" , 2222);
+        query
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull @NotNull Task<QuerySnapshot> task) {
                         if(task.isSuccessful()){
                             for(QueryDocumentSnapshot document : task.getResult()){
-                                Map<String, Object> values = document.getData();
-                                Log.d(TAG,document.getId() + "->" + values.get("born"));
+                                //Map<String, Object> values = document.getData();
+                                //Log.d(TAG,document.getId() + "->" + values.get("born"));
+                                Log.d(TAG,document.getId() + "->" + document.getData());
                             }
                         }else{
                             Log.w(TAG, "Error getting Document" , task.getException());
