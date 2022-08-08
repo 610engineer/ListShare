@@ -11,6 +11,7 @@ import android.widget.Button;
 
 import com.example.listshare.IdList.DispListIdActivity;
 import com.example.listshare.IdList.ListIdAdapter;
+import com.example.listshare.MemoList.AddMemoActivity;
 import com.example.listshare.MemoList.MemoAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
