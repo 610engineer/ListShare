@@ -9,10 +9,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.listshare.AddIdActivity;
 import com.example.listshare.R;
 import com.example.listshare.Room.EntityViewModel;
 import com.example.listshare.Room.RoomEntity;
-import com.example.listshare.AddItemActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class DispListIdActivity extends AppCompatActivity {
@@ -34,7 +34,7 @@ public class DispListIdActivity extends AppCompatActivity {
         recyclerView.setLayoutManager((layoutManager));
 
         //make adapter and set to recyclerview
-        final ListIdAdapter adapter = new ListIdAdapter(new ListIdAdapter.WordDiff());
+        final ListIdAdapter adapter = new ListIdAdapter(new ListIdAdapter.IdDiff());
         recyclerView.setAdapter(adapter);
 
         // Get a new or existing ViewModel from the ViewModelProvider.
@@ -44,7 +44,7 @@ public class DispListIdActivity extends AppCompatActivity {
         });
 
         fab.setOnClickListener(view -> {
-            Intent intent = new Intent(this, AddItemActivity.class);
+            Intent intent = new Intent(this, AddIdActivity.class);
             startActivityForResult(intent, NEW_WORD_ACTIVITY_REQUEST_CODE);
         });
     }
