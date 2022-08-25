@@ -1,18 +1,32 @@
 package com.example.listshare;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.listshare.IdList.DispListIdActivity;
 import com.example.listshare.IdList.ListIdAdapter;
+import com.example.listshare.MemoList.AddMemoActivity;
+import com.example.listshare.MemoList.Memo;
 import com.example.listshare.MemoList.MemoAdapter;
+import com.example.listshare.MemoList.MemoViewHolder;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.firebase.ui.firestore.SnapshotParser;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +52,36 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseClient fc = new FirebaseClient();
 
+        Query query = FirebaseFirestore.getInstance()
+                .collection("users")
+                .orderBy("timestamp");
+
+        //test Adapter
+
+        FirestoreRecyclerOptions<Memo> options = new FirestoreRecyclerOptions.Builder<Memo>()
+                .setQuery(query , Memo.class)
+                .build();
+
+        FirestoreRecyclerAdapter adapter = new FirestoreRecyclerAdapter<Memo , MemoViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NotNull MemoViewHolder holder, int position, Memo model) {
+                holder.setMemoView(model.getMemo());
+            }
+
+            @NonNull
+            @NotNull
+            @Override
+            public MemoViewHolder onCreateViewHolder(@NonNull ViewGroup group, int viewType) {
+                View view = LayoutInflater.from(group.getContext())
+                        .inflate(R.layout.row_layout , group , false);
+                return new MemoViewHolder(view);
+            }
+
+        };
+
+
+
+
         //fix recyclerview layout size
         recyclerView.setHasFixedSize(true);
 
@@ -46,10 +90,15 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager((layoutManager));
 
         //make adapter and set to recyclerview
+        /*FirestoreRecyclerOptions<Memo> options = new FirestoreRecyclerOptions.Builder<Memo>()
+                .setQuery(query,Memo.class)
+                .build();
         List<String> dataset = new ArrayList<>();
-        dataset = fc.GetMemoList();
-        final MemoAdapter adapter = new MemoAdapter(dataset);
+         */
+        //final MemoAdapter adapter = new MemoAdapter(options);
         recyclerView.setAdapter(adapter);
+
+
 
 
         dispListIdBt.setOnClickListener(new View.OnClickListener() {
