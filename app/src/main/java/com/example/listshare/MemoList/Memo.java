@@ -1,10 +1,12 @@
 package com.example.listshare.MemoList;
 
+import com.google.firebase.firestore.ServerTimestamp;
+
 import java.util.Date;
 
 public class Memo {
     private String mMemo;
-    private Date mTimeStamp;
+    //private Date mTimeStamp;
     private int mQty;
 
     public Memo(){
@@ -32,11 +34,4 @@ public class Memo {
         mQty = qty;
     }
 
-    public Date getTimeStamp(){
-        return mTimeStamp;
-    }
-
-    public void setTimestamp(Date timeStamp){
-        mTimeStamp = timeStamp;
-    }
 }

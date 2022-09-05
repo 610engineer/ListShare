@@ -19,35 +19,28 @@ import java.util.List;
 public class MemoAdapter extends FirestoreRecyclerAdapter<Memo , MemoAdapter.MemoViewHolder> {
     private List<String> localDataSet;
 
-    public class MemoViewHolder extends RecyclerView.ViewHolder {
-        private final TextView memoView;
+    public MemoAdapter(
+            @NonNull FirestoreRecyclerOptions<Memo> options
+    ){
+        super(options);
+    }
 
-        public MemoViewHolder(View view){
+    class MemoViewHolder extends RecyclerView.ViewHolder{
+        TextView memo;
+        public MemoViewHolder(@NonNull View view){
             super(view);
-            memoView = view.findViewById(R.id.textView);
-        }
-
-        public void setMemoView(String memo) {
-            memoView.setText(memo);
+            memo = view.findViewById(R.id.textView);
         }
     }
 
-    public MemoAdapter(FirestoreRecyclerOptions<Memo> option){
-        super(option);
+    @Override
+    protected void onBindViewHolder(@NonNull MemoViewHolder holder, int position , @NonNull Memo model){
+        holder.memo.setText(model.getMemo());
     }
 
     public MemoViewHolder onCreateViewHolder(ViewGroup viewGroup , int viewType){
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.row_layout , viewGroup, false);
         return  new MemoViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull @NotNull MemoViewHolder holder, int position , Memo model) {
-        holder.setMemoView(model.getMemo());
-    }
-
-    public int getItemCount(){
-        return localDataSet.size();
     }
 }

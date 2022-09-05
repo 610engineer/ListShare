@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static final int NEW_WORD_ACTIVITY_REQUEST_CODE = 1;
 
+    private FirestoreRecyclerAdapter adapter;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,53 +54,20 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseClient fc = new FirebaseClient();
 
-        Query query = FirebaseFirestore.getInstance()
-                .collection("users")
-                .orderBy("timestamp");
-
         //test Adapter
+        recyclerView.setLayoutManager(
+                new LinearLayoutManager(this));
+        db = FirebaseFirestore.getInstance();
+        Query query = db.
+                collection("test1");
 
         FirestoreRecyclerOptions<Memo> options = new FirestoreRecyclerOptions.Builder<Memo>()
                 .setQuery(query , Memo.class)
                 .build();
 
-        FirestoreRecyclerAdapter adapter = new FirestoreRecyclerAdapter<Memo , MemoViewHolder>(options) {
-            @Override
-            protected void onBindViewHolder(@NotNull MemoViewHolder holder, int position, Memo model) {
-                holder.setMemoView(model.getMemo());
-            }
+        adapter = new MemoAdapter(options);
 
-            @NonNull
-            @NotNull
-            @Override
-            public MemoViewHolder onCreateViewHolder(@NonNull ViewGroup group, int viewType) {
-                View view = LayoutInflater.from(group.getContext())
-                        .inflate(R.layout.row_layout , group , false);
-                return new MemoViewHolder(view);
-            }
-
-        };
-
-
-
-
-        //fix recyclerview layout size
-        recyclerView.setHasFixedSize(true);
-
-        //set recyclerview to layout manager
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager((layoutManager));
-
-        //make adapter and set to recyclerview
-        /*FirestoreRecyclerOptions<Memo> options = new FirestoreRecyclerOptions.Builder<Memo>()
-                .setQuery(query,Memo.class)
-                .build();
-        List<String> dataset = new ArrayList<>();
-         */
-        //final MemoAdapter adapter = new MemoAdapter(options);
         recyclerView.setAdapter(adapter);
-
-
 
 
         dispListIdBt.setOnClickListener(new View.OnClickListener() {
@@ -116,9 +85,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
         //for test
-
-
-
         bt1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,6 +106,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
 
