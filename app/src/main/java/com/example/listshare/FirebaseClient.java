@@ -4,7 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-
+import com.example.listshare.MemoList.Memo;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -53,8 +54,6 @@ public class FirebaseClient {
 
     public List<String> GetMemoList(){
         List<String> dataset = new ArrayList<>();
-        Query query = db.collection("test1")
-                .orderBy("timestamp");
         db.collection("users")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

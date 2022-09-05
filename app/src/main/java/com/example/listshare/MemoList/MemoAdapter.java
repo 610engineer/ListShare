@@ -9,43 +9,38 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.listshare.R;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class MemoAdapter extends RecyclerView.Adapter<MemoAdapter.MemoViewHolder> {
+public class MemoAdapter extends FirestoreRecyclerAdapter<Memo , MemoAdapter.MemoViewHolder> {
     private List<String> localDataSet;
 
-    public class MemoViewHolder extends RecyclerView.ViewHolder {
-        private final TextView memoView;
+    public MemoAdapter(
+            @NonNull FirestoreRecyclerOptions<Memo> options
+    ){
+        super(options);
+    }
 
-        public MemoViewHolder(View view){
+    class MemoViewHolder extends RecyclerView.ViewHolder{
+        TextView memo;
+        public MemoViewHolder(@NonNull View view){
             super(view);
-            memoView = view.findViewById(R.id.textView);
-        }
-
-        public TextView getMemoView() {
-            return memoView;
+            memo = view.findViewById(R.id.textView);
         }
     }
 
-    public MemoAdapter(List<String> dataSet){
-        localDataSet = dataSet;
+    @Override
+    protected void onBindViewHolder(@NonNull MemoViewHolder holder, int position , @NonNull Memo model){
+        holder.memo.setText(model.getMemo());
     }
 
     public MemoViewHolder onCreateViewHolder(ViewGroup viewGroup , int viewType){
         View view = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.row_layout , viewGroup, false);
         return  new MemoViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull @NotNull MemoViewHolder holder, int position) {
-        holder.getMemoView().setText(localDataSet.get(position));
-    }
-
-    public int getItemCount(){
-        return localDataSet.size();
     }
 }
