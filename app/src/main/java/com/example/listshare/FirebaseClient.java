@@ -54,8 +54,6 @@ public class FirebaseClient {
 
     public List<String> GetMemoList(){
         List<String> dataset = new ArrayList<>();
-        Query query = db.collection("test1")
-                .orderBy("timestamp");
         db.collection("users")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
