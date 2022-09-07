@@ -31,23 +31,29 @@ public class FirebaseClient {
     private final static String TAG = "FirebaseClient";
 
     public void AddMemo(String memo){
+        String docId = db.collection("test1").document().getId();
         Map<String , Object> object = new HashMap<>();
 
         object.put("memo" , memo);
+        object.put ("docId", docId);
         db.collection("test1")
-                .add(object)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                .document(docId)
+                .set(object)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG , "documentSnapshot successfully written!");
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
+                    public void onFailure(@NonNull @NotNull Exception e) {
+                        Log.w(TAG , "Error adding Document" , e);
                     }
                 });
+    }
+
+    public void deleteMemo(int position){
 
 
     }
