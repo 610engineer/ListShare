@@ -7,6 +7,13 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="48dp"
         style="@style/word_title"/>
+
+    <TextView
+        android:id="@+id/docIdView"
+        style="@style/word_title"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:visibility="invisible"/>
 </LinearLayout>
