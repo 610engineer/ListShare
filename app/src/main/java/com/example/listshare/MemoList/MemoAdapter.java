@@ -17,7 +17,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class MemoAdapter extends FirestoreRecyclerAdapter<Memo , MemoAdapter.MemoViewHolder> {
-    private List<String> localDataSet;
 
     public MemoAdapter(
             @NonNull FirestoreRecyclerOptions<Memo> options
@@ -27,15 +26,18 @@ public class MemoAdapter extends FirestoreRecyclerAdapter<Memo , MemoAdapter.Mem
 
     class MemoViewHolder extends RecyclerView.ViewHolder{
         TextView memo;
+        TextView docId;
         public MemoViewHolder(@NonNull View view){
             super(view);
             memo = view.findViewById(R.id.textView);
+            docId = view.findViewById(R.id.docIdView);
         }
     }
 
     @Override
     protected void onBindViewHolder(@NonNull MemoViewHolder holder, int position , @NonNull Memo model){
         holder.memo.setText(model.getMemo());
+        holder.docId.setText(model.getDocId());
     }
 
     public MemoViewHolder onCreateViewHolder(ViewGroup viewGroup , int viewType){
@@ -43,4 +45,5 @@ public class MemoAdapter extends FirestoreRecyclerAdapter<Memo , MemoAdapter.Mem
                 .inflate(R.layout.row_layout , viewGroup, false);
         return  new MemoViewHolder(view);
     }
+
 }
