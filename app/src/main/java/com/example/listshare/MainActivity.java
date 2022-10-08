@@ -2,34 +2,26 @@ package com.example.listshare;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.listshare.IdList.DispListIdActivity;
-import com.example.listshare.IdList.ListIdAdapter;
 import com.example.listshare.MemoList.AddMemoActivity;
 import com.example.listshare.MemoList.Memo;
 import com.example.listshare.MemoList.MemoAdapter;
-import com.example.listshare.MemoList.MemoViewHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.firebase.ui.firestore.SnapshotParser;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -68,6 +60,23 @@ public class MainActivity extends AppCompatActivity {
         adapter = new MemoAdapter(options);
 
         recyclerView.setAdapter(adapter);
+
+        ItemTouchHelper.SimpleCallback callback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull @NotNull RecyclerView recyclerView, @NonNull @NotNull RecyclerView.ViewHolder viewHolder, @NonNull @NotNull RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull @NotNull RecyclerView.ViewHolder viewHolder, int direction) {
+                int swipePosition = viewHolder.getAdapterPosition();
+                MemoAdapter adapter = (MemoAdapter) recyclerView.getAdapter();
+                Memo memo = adapter.getItem(swipePosition);
+                String docId = memo.getDocId();
+                fc.deleteMemo(docId);
+            }
+        };
+        (new ItemTouchHelper(callback)).attachToRecyclerView(recyclerView);
 
 
         dispListIdBt.setOnClickListener(new View.OnClickListener() {

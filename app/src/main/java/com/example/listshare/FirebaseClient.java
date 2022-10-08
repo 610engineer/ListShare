@@ -53,7 +53,20 @@ public class FirebaseClient {
                 });
     }
 
-    public void deleteMemo(int position){
+    public void deleteMemo(String docId){
+        db.collection("test1").document(docId)
+                .delete()
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull @NotNull Exception e) {
+                Log.w(TAG , "Error Deleting document" , e);
+            }
+        });
 
 
     }
