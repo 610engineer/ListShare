@@ -19,7 +19,7 @@ public class AddMemoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_memo);
         Button addButton = findViewById(R.id.add_memo_button);
         mEditText = findViewById(R.id.input_memo);
-        FirebaseClient fc = new FirebaseClient();
+        FirebaseClient fc = FirebaseClient.getInstance();
 
         addButton.setOnClickListener(view -> {
             Intent replyIntent = new Intent();

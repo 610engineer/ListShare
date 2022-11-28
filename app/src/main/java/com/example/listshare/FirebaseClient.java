@@ -29,6 +29,16 @@ public class FirebaseClient {
     // Access a Cloud Firestore instance from your Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private final static String TAG = "FirebaseClient";
+    private static FirebaseClient instance;
+    private FirebaseClient(){};
+
+
+    public static FirebaseClient getInstance(){
+        if(instance == null){
+            instance = new FirebaseClient();
+        }
+        return instance;
+    }
 
     public void AddMemo(String memo){
         String docId = db.collection("test1").document().getId();
