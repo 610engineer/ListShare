@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         Button bt2 = findViewById(R.id.button2);
         Button bt3 = findViewById(R.id.button3);
 
-        FirebaseClient fc = new FirebaseClient();
+        FirebaseClient fc = FirebaseClient.getInstance();
 
         //test Adapter
         recyclerView.setLayoutManager(
